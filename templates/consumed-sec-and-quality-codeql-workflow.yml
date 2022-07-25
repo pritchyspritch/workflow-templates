@@ -1,0 +1,17 @@
+name: "Consumed security and quality codeql workflow"
+
+on:
+  push:
+  pull_request:
+    branches: [ main ]
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.txt'
+  schedule:
+    - cron: '0 7 * * 1'
+
+jobs:
+  call-reusable-codeql:
+    uses: pritchyspritch/reusable-workflows/.github/workflows/reusable-sec-and-quality-codeql.yml@main
+    with:
+      language: 'csharp' # Set language

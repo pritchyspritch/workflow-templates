@@ -1,0 +1,17 @@
+name: "Consumed codeql workflow"
+
+on:
+  push:
+  pull_request:
+    branches: [ main ]
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.txt'
+  schedule:
+    - cron: '0 7 * * 1'
+
+jobs:
+  call-reusable-codeql:
+    uses: pritchyspritch/reusable-workflows/.github/workflows/reusable-codeql-workflow.yml@main
+    with:
+      language: 'csharp' # Set language

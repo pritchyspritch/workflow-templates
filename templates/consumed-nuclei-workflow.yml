@@ -1,0 +1,13 @@
+on:
+  workflow_run:
+    workflows: [Build] # A workflow has run to build a web application / component and has completed
+    types: [completed]
+
+jobs:
+  on-success:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }} # If successful, run a vulnerabilty scan
+    call-reusable-nuclei:
+      uses: pritchyspritch/reusable-workflows/.github/workflows/reusable-vulnerabilityscan-workflow.yml@main
+      with:
+        website-url: 'https://pritchyspritch.github.io' # Set website URL
+
